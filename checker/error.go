@@ -1,14 +1,9 @@
 package checker
 
-import "fmt"
+import "log"
 
 func CheckErr(err error) {
-	defer func() {
-		if recover() != nil {
-			fmt.Println(recover())
-		}
-	}()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }

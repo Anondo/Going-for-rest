@@ -7,14 +7,16 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var DownCommand = cobra.Command{
-	Use:   "up",
-	Short: "Depopulates the database",
-	Run:   downDatabase,
-}
+var (
+	DownCommand = &cobra.Command{
+		Use:   "down",
+		Short: "Depopulates the database",
+		Run:   downDatabase,
+	}
+)
 
 func downDatabase(cmd *cobra.Command, args []string) {
-	log.Println("Populating database....")
+	log.Println("Depopulating database....")
 
 	migrations.DownMigrate()
 

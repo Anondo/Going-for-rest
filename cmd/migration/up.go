@@ -7,11 +7,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var UpCommand = cobra.Command{
-	Use:   "up",
-	Short: "Populates the database",
-	Run:   upDatabase,
-}
+var (
+	UpCommand = &cobra.Command{
+		Use:   "up",
+		Short: "Populates the database",
+		Run:   upDatabase,
+	}
+)
 
 func upDatabase(cmd *cobra.Command, args []string) {
 	log.Println("Populating database....")

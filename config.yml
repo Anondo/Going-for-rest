@@ -1,0 +1,8 @@
+database:
+  name: "mysql"
+  port: 3306
+  ip: "localhost"
+  username: "root"
+  password: ""
+  protocol: "tcp"
+  db: "golang"

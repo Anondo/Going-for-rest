@@ -10,7 +10,6 @@ type Database struct {
 	Host     string
 	Username string
 	Password string
-	Protocol string
 	DB       string
 }
 
@@ -23,7 +22,6 @@ func LoadDB() {
 		Host:     viper.GetString("database.host"),
 		Username: viper.GetString("database.username"),
 		Password: viper.GetString("database.password"),
-		Protocol: viper.GetString("database.protocol"),
 		DB:       viper.GetString("database.db"),
 	}
 }

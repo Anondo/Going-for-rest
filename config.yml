@@ -2,10 +2,9 @@ app:
   host: "127.0.0.1"
   port: 8080
 database:
-  name: "mysql"
-  port: 3306
-  host: "127.0.0.1"
-  username: "root"
-  password: ""
-  protocol: "tcp"
-  db: "golang"
+  name: postgres
+  port: 5432
+  host: 127.0.0.1
+  username: postgres
+  password: secret
+  db: gorest

@@ -1,16 +1,25 @@
-version: '3'
+version: '3.1'
 
 services:
-  web:
-    image: web_docker
-    ports:
-      - 8080:8080
-    depends_on:
-      - database
-
   database:
-    image: mariadb
+    image: postgres:alpine
+    ports:
+            - '5432:5432'
     environment:
-      - MYSQL_ROOT_PASSWORD=password
+      - POSTGRES_DB=gorest
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=secret
     volumes:
-      - /data:/var/lib/mysql
+        - './storage/postgres:/var/lib/postgres/data'
+
+  adminer:
+        image: adminer
+        ports:
+            - '9000:8080'
+        links:
+            - 'database:db'
+
+  consul:
+        image: 'consul:latest'
+        ports:
+            - '8500:8500'

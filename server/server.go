@@ -22,7 +22,7 @@ func Start() {
 
 	routes.SetBlogRoutes(router)
 
-	log.Printf("Server running at %s:%d\n", host, port)
+	log.Printf("HTTP Server running at %s:%d\n", host, port)
 
 	err := http.ListenAndServe(":"+strconv.Itoa(port), router)
 	checker.CheckErr(err)

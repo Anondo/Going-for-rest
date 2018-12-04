@@ -21,7 +21,7 @@ func Execute() {
 }
 
 func init() {
-	RootCommand.Flags().IntP("port", "p", 0, "the port to do things on")
+	RootCommand.PersistentFlags().IntP("port", "p", 0, "the port to run http server on")
 	RootCommand.Flags().StringP("config", "c", "", "the configuration file")
 
 	cobra.OnInitialize(initConfig)

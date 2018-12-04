@@ -2,6 +2,7 @@ package server
 
 import (
 	"going_rest/checker"
+	"going_rest/config"
 	"going_rest/routes"
 	"log"
 	"net/http"
@@ -10,16 +11,18 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-const (
-	port = 8080
-)
-
 func Start() {
+
+	app := config.GetApp()
+
+	port := app.Port
+	host := app.Host
+
 	router := httprouter.New()
 
 	routes.SetBlogRoutes(router)
 
-	log.Println("Server running at localhost: " + strconv.Itoa(port))
+	log.Printf("Server running at %s:%d\n", host, port)
 
 	err := http.ListenAndServe(":"+strconv.Itoa(port), router)
 	checker.CheckErr(err)

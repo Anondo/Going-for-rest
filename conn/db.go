@@ -2,6 +2,8 @@ package conn
 
 import (
 	"going_rest/checker"
+	"going_rest/config"
+	"strconv"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -9,8 +11,21 @@ import (
 
 var DB *gorm.DB
 
-func init() {
+func Connect() {
 	var err error
-	DB, err = gorm.Open("mysql", "root:@tcp(127.0.0.1:3306)/golang?parseTime=true")
+
+	d := config.GetDB()
+	name := d.Name
+	username := d.Username
+	protocol := d.Protocol
+	host := d.Host
+	port := d.Port
+	db := d.DB
+
+	connectionString := username + ":@" + protocol + "(" + host + ":" + strconv.Itoa(port) +
+		")/" + db + "?parseTime=true"
+
+	DB, err = gorm.Open(name, connectionString)
 	checker.CheckErr(err)
+
 }

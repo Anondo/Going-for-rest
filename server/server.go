@@ -1,9 +1,9 @@
 package server
 
 import (
-	"going_rest/checker"
-	"going_rest/config"
-	"going_rest/routes"
+	"gorest/checker"
+	"gorest/config"
+	"gorest/routes"
 	"log"
 	"net/http"
 	"strconv"

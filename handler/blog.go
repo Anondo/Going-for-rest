@@ -2,10 +2,10 @@ package handler
 
 import (
 	"fmt"
-	"going_rest/checker"
-	"going_rest/model"
-	"going_rest/serializer"
-	"going_rest/view"
+	"gorest/checker"
+	"gorest/model"
+	"gorest/serializer"
+	"gorest/view"
 	"net/http"
 	"strconv"
 

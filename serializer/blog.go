@@ -2,8 +2,8 @@ package serializer
 
 import (
 	"encoding/json"
-	"going_rest/checker"
-	"going_rest/model"
+	"gorest/checker"
+	"gorest/model"
 	"net/http"
 )
 

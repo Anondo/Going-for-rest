@@ -1,7 +1,7 @@
 package main
 
 import (
-	"going_rest/cmd"
+	"gorest/cmd"
 )
 
 func main() {

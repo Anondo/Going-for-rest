@@ -2,8 +2,8 @@ package conn
 
 import (
 	"fmt"
-	"going_rest/checker"
-	"going_rest/config"
+	"gorest/checker"
+	"gorest/config"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"

@@ -1,8 +1,8 @@
 #!/bin/sh
 
-go build .
+go build -v .
 export GOREST_CONSUL_URL="127.0.0.1:8500"
 export GOREST_CONSUL_PATH="gorest"
 echo "ENV: GOREST_CONSUL_URL=" $GOREST_CONSUL_URL
 echo "ENV: GOREST_CONSUL_PATH=" $GOREST_CONSUL_PATH
-./going_rest serve -p 8080
+./gorest serve -p 8080

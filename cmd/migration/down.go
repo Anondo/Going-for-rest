@@ -1,7 +1,7 @@
 package migration
 
 import (
-	"going_rest/migrations"
+	"gorest/migrations"
 	"log"
 
 	"github.com/spf13/cobra"

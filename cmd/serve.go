@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"going_rest/server"
+	"gorest/server"
 
 	"github.com/spf13/cobra"
 )

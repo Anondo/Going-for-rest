@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"going_rest/handler"
+	"gorest/handler"
 
 	"github.com/julienschmidt/httprouter"
 )

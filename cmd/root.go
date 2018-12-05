@@ -1,10 +1,10 @@
 package cmd
 
 import (
-	"going_rest/checker"
-	"going_rest/cmd/migration"
-	"going_rest/config"
-	"going_rest/conn"
+	"gorest/checker"
+	"gorest/cmd/migration"
+	"gorest/config"
+	"gorest/conn"
 
 	"github.com/spf13/cobra"
 )

@@ -1,9 +1,9 @@
 package view
 
 import (
-	"going_rest/conn"
-	"going_rest/model"
-	"going_rest/serializer"
+	"gorest/conn"
+	"gorest/model"
+	"gorest/serializer"
 )
 
 func BlogPost(blog model.Blog) {

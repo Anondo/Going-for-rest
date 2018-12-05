@@ -1,7 +1,7 @@
 package config
 
 import (
-	"going_rest/checker"
+	"gorest/checker"
 	"log"
 	"strings"
 

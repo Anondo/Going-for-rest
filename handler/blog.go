@@ -9,43 +9,56 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/julienschmidt/httprouter"
+	"github.com/go-chi/chi"
 )
 
-func BlogHandler(rw http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-	if req.Method == "GET" {
-		if len(ps) > 0 {
-			id, err := strconv.Atoi(ps.ByName("id"))
-			checker.CheckErr(err)
-			fmt.Fprintf(rw, "%s", view.BlogGet(id))
-		} else {
-			fmt.Fprintf(rw, "%s", view.BlogGet())
-		}
+func listBlogs(rw http.ResponseWriter, r *http.Request) {
+	rw.Write(view.BlogGet())
+}
+func listBlog(rw http.ResponseWriter, r *http.Request) {
+	istr := chi.URLParam(r, "id")
+	i, err := strconv.Atoi(istr)
+	checker.CheckErr(err)
+	fmt.Fprintf(rw, "%s", view.BlogGet(i))
+}
+func createBlog(rw http.ResponseWriter, r *http.Request) {
+	var blog model.Blog
+	serializer.BlogDeserialize(&blog, r)
+	view.BlogPost(blog)
+	fmt.Fprintf(rw, "%s", []byte(`[]`))
+}
+func updateBlogPut(rw http.ResponseWriter, r *http.Request) {
+	var blog model.Blog
+	serializer.BlogDeserialize(&blog, r)
+	istr := chi.URLParam(r, "id")
+	i, err := strconv.Atoi(istr)
+	checker.CheckErr(err)
+	fmt.Fprintf(rw, "%s", view.BlogPut(i, blog))
+}
+func removeBlog(rw http.ResponseWriter, r *http.Request) {
+	istr := chi.URLParam(r, "id")
+	i, err := strconv.Atoi(istr)
+	checker.CheckErr(err)
+	fmt.Fprintf(rw, "%s", view.BlogDelete(i))
+}
+func updateBlogPatch(rw http.ResponseWriter, r *http.Request) {
+	var blog model.Blog
+	serializer.BlogDeserialize(&blog, r)
+	istr := chi.URLParam(r, "id")
+	i, err := strconv.Atoi(istr)
+	checker.CheckErr(err)
+	fmt.Fprintf(rw, "%s", view.BlogPatch(i, blog))
+}
 
-	}
-	if req.Method == "POST" {
-		var blog model.Blog
-		serializer.BlogDeserialize(&blog, req)
-		view.BlogPost(blog)
-		fmt.Fprintf(rw, "%s", []byte(`[]`))
-	}
-	if req.Method == "PUT" {
-		var blog model.Blog
-		serializer.BlogDeserialize(&blog, req)
-		id, err := strconv.Atoi(ps.ByName("id"))
-		checker.CheckErr(err)
-		fmt.Fprintf(rw, "%s", view.BlogPut(id, blog))
-	}
-	if req.Method == "DELETE" {
-		id, err := strconv.Atoi(ps.ByName("id"))
-		checker.CheckErr(err)
-		fmt.Fprintf(rw, "%s", view.BlogDelete(id))
-	}
-	if req.Method == "PATCH" {
-		var blog model.Blog
-		serializer.BlogDeserialize(&blog, req)
-		id, err := strconv.Atoi(ps.ByName("id"))
-		checker.CheckErr(err)
-		fmt.Fprintf(rw, "%s", view.BlogPatch(id, blog))
-	}
+func BlogHandler() http.Handler {
+	h := chi.NewRouter()
+	h.Group(func(r chi.Router) {
+		r.Get("/", listBlogs)
+		r.Get("/{id}", listBlog)
+		r.Post("/", createBlog)
+		r.Put("/{id}", updateBlogPut)
+		r.Patch("/{id}", updateBlogPatch)
+		r.Delete("/{id}", removeBlog)
+	})
+	return h
 }

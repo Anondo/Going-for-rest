@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/julienschmidt/httprouter"
+	"github.com/go-chi/chi"
 )
 
 func Start() {
@@ -18,13 +18,12 @@ func Start() {
 	port := app.Port
 	host := app.Host
 
-	router := httprouter.New()
-
-	routes.SetBlogRoutes(router)
-
 	log.Printf("HTTP Server running at %s:%d\n", host, port)
 
-	err := http.ListenAndServe(":"+strconv.Itoa(port), router)
+	r := chi.NewMux()
+	r.Mount("/api/", routes.Router())
+
+	err := http.ListenAndServe(":"+strconv.Itoa(port), r)
 	checker.CheckErr(err)
 
 }
